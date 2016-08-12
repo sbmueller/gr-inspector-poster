@@ -94,6 +94,8 @@ All these tasks should be available live during runtime.
 
 This project was part of Google Summer of Code and ESA Summer of Code in Space programs. The toolbox was developed by Sebastian Müller
 while the explicit AMC functionality was developed by Christopher Richardson.
+
+asdf
 }
 	
 %----------------------------------------------------------------------------------------
@@ -105,29 +107,59 @@ The toolbox was developed with the following main flowgraph in mind.
 
 \includegraphics[width=\textwidth]{flowgraph}
 \captionof{figure}{Example flowgraph}
-
-The \textbf{Signal Extractor} block assures the ability to append custom signal processing chains for users. Each analysis block can have a feedback message to the \textbf{Inspector GUI} to print their results there.
+\begin{multicols}{2}
+	The \textbf{Signal Extractor} block assures the ability to append custom signal processing chains for users. Each analysis block can have a feedback message to the \textbf{Inspector GUI} to print their results there.
+\end{multicols}
 
 %\vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
+}
+
+%----------------------------------------------------------------------------------------
+%	GUI
+%----------------------------------------------------------------------------------------
+
+\headerbox{GUI}{name=gui, column=1, span=2, below=introduction}{
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{gui}
+	\captionof{figure}{Inspector GUI}
+	\end{center}
+	
+
+	\begin{multicols}{2}
+		The GUI displays the input spectrum along with markers for all detected signals. Next to the graphical markers, information text is displayed. Each signal has a number and estimated \textbf{center frequency} and \textbf{bandwidth}. Distinct analysis toolboxes can provide \textbf{additional information} for specific signals, which will be appended to the info text.
+	\end{multicols}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	Example
+%----------------------------------------------------------------------------------------
+
+\headerbox{Example}{name=example, column=1, span=2, below=gui}{
+Along with existing GNU Radio blocks, a complete FM signal processing from receiving to demodulation can be performed live and automatically.
+
+	\centering
+	\includegraphics[width=0.9\textwidth]{fm}
+	\captionof{figure}{Live FM demodulation}
 }
 
 %----------------------------------------------------------------------------------------
 %	COMPONENTS
 %----------------------------------------------------------------------------------------
 
-\headerbox{Components}{name=components,column=0,below=introduction}{ % This block's bottom aligns with the bottom of the conclusion block
-The toolbox consist of the follwing blocks:
+\headerbox{Components}{name=components,column=0,below=introduction, bottomaligned=example}{ % This block's bottom aligns with the bottom of the conclusion block
+
 \paragraph{Signal Detector}
 Is able to perform energy detection on an input signal. The user can specify a threshold in dB or use an automatic threshold calculation by entering a sensitivity between 0 and 1.
 
 \paragraph{Inspector GUI}
-The GUI block uses QT and QWT to create a plot of the estimated PSD by the \textbf{Signal Detector} and marks the detected signal edges. By enabling manual selection, users can select own parts of the spectrum that get passed downstream. Analysis blocks can be connected to the GUI to display analysis results directly next to the specific signal.
+The GUI block uses QT and QWT to create a plot of the estimated PSD by the Signal Detector and marks the detected signal edges. By enabling manual selection, users can select own parts of the spectrum that get passed downstream. Analysis blocks can be connected to the GUI to display analysis results directly next to the specific signal.
 
 \paragraph{Signal Separator}
 Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. All the signal samples get wrapped in a message and passed downstream. Taps can be calculated during runtime or a precalculated taps file can be selected.
 
 \paragraph{Signal Extractor}
-Takes messages from the \textbf{Signal Separator} and extracts only the samples belonging to the specified signal in the block parameters. The extracted signals get passed as a complex stream. The input samples can be resampled to satisfy a constand output sample rate.
+Takes messages from the Signal Separator and extracts only the samples belonging to the specified signal in the block parameters. The extracted signals get passed as a complex stream. The input samples can be resampled to satisfy a constand output sample rate.
 
 \paragraph{AMC Block}
 \textbf{TODO}
@@ -139,119 +171,24 @@ Estimates OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP len
 After performed estimation, the signal can be frequency synchronized and stream tags can be inserted at OFDM symbol beginnings.
 
 }
-%----------------------------------------------------------------------------------------
-%	MATERIALS AND METHODS
-%----------------------------------------------------------------------------------------
 
-\headerbox{Materials \& Methods}{name=method,column=0,below=components}{ % This block's bottom aligns with the bottom of the conclusion block
 
-The following materials were required to complete the research:
 
-\begin{itemize}\compresslist
-\item Curabitur pellentesque dignissim
-\item Eu facilisis est tempus quis
-\item Duis porta consequat lorem
-\item Eu facilisis est tempus quis
-\end{itemize}
-
-The following equations were used for statistical analysis:
-
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname}
-\end{equation}\
-
-\begin{equation}
-E = mc^{2}
-\label{eqn:Einstein}
-\end{equation}
-
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros.
-}
-
-%----------------------------------------------------------------------------------------
-%	MATERIALS AND METHODS
-%----------------------------------------------------------------------------------------
-
-\headerbox{Materials \& Methods}{name=method,column=1,below=components}{ % This block's bottom aligns with the bottom of the conclusion block
-
-The following materials were required to complete the research:
-
-\begin{itemize}\compresslist
-\item Curabitur pellentesque dignissim
-\item Eu facilisis est tempus quis
-\item Duis porta consequat lorem
-\item Eu facilisis est tempus quis
-\end{itemize}
-
-The following equations were used for statistical analysis:
-
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname}
-\end{equation}\
-
-\begin{equation}
-E = mc^{2}
-\label{eqn:Einstein}
-\end{equation}
-
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros.
-}
-
-%----------------------------------------------------------------------------------------
-%	GUI
-%----------------------------------------------------------------------------------------
-
-\headerbox{GUI}{name=gui, column=1, span=2, below=introduction, bottomaligned=components}{
-	\includegraphics[width=\textwidth]{gui}
-	\captionof{figure}{Inspector GUI}
-}
-%----------------------------------------------------------------------------------------
-%	MATERIALS AND METHODS
-%----------------------------------------------------------------------------------------
-
-\headerbox{Materials \& Methods}{name=method,column=2,below=components}{ % This block's bottom aligns with the bottom of the conclusion block
-
-The following materials were required to complete the research:
-
-\begin{itemize}\compresslist
-\item Curabitur pellentesque dignissim
-\item Eu facilisis est tempus quis
-\item Duis porta consequat lorem
-\item Eu facilisis est tempus quis
-\end{itemize}
-
-The following equations were used for statistical analysis:
-
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname}
-\end{equation}\
-
-\begin{equation}
-E = mc^{2}
-\label{eqn:Einstein}
-\end{equation}
-
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros.
-}
 
 %----------------------------------------------------------------------------------------
 %	CONTACT
 %----------------------------------------------------------------------------------------
 
 \headerbox{Contact}{name=contact,column=2,above=bottom}{ % This block is as tall as the references block
-Maintainers of this module:
-\begin{multicols}{2}
+Maintainers of this module:\\[0.1em]
+
 Sebastian Müller\\
 KIT Karlsruhe\\
-gsenpo@gmail.com
+gsenpo@gmail.com\\[0.1em]
 
 Christopher Richardson\\
 Lancaster University\\
 c.richardson@lancaster.ac.uk
-\end{multicols}
 
 }
 
