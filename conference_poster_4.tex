@@ -18,7 +18,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[a0paper,fontscale=0.35]{baposter} % Adjust the font scale/size here
+\documentclass[a0paper,fontscale=0.32]{baposter} % Adjust the font scale/size here
 
 \usepackage{graphicx} % Required for including images
 \graphicspath{{figures/}} % Directory in which figures are stored
@@ -72,10 +72,10 @@ linewidth=1pt % Width of the border lines around content boxes
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 %
-{\includegraphics[height=8em]{logo_body}} % First university/lab logo on the left
-{\bf\textsc{The Inspector (gr-inspector)\\ \Large{Signal Analysis Toolbox}}\vspace{0.5em}} % Poster title
+{\includegraphics[width=13em]{gsoc}} % First university/lab logo on the left
+{\bf\textsc{The Inspector (gr-inspector)\\ \Large{Signal Analysis Toolbox for GNU Radio}}\vspace{0.5em}} % Poster title
 {\textsc{Sebastian Müller, Karlsruhe Institute of Technology}} % Author names and institution
-{\includegraphics[width=13em]{gsoc}} % Second university/lab logo on the right
+{\includegraphics[width=9em]{cel}} % Second university/lab logo on the right
 
 
 %----------------------------------------------------------------------------------------
@@ -83,9 +83,17 @@ linewidth=1pt % Width of the border lines around content boxes
 %----------------------------------------------------------------------------------------
 
 \headerbox{Introduction}{name=introduction,column=0,row=0, span=1}{
-Signal intelligence describes the gathering of information out of intercepted radio signals with unknown origin and unknown parameters. GNU Radio has already the ability to do signal intelligence, but it is only possible through some detours. Real-time signal intelligence is hardly possible. The tool \texttt{gqrx} has some of this ability (real-time AM/FM demodulation), but there is no final solution for this problem at this time. The target of this project is to develop an easily accessible and extendible solution for this workflow including automatic signal detection and automatic modulation classification. In addition, an OFDM parameter estimation block is included. Further deliverables for the future are a radio service allocation database, blind synchronization methods and an automatic demodulation block.\\[0.2cm]
+gr-inspector is an out-of-tree module for GNU Radio. The target was to develop a signal analysis toolbox with the following capabilities:
+\begin{itemize}\compresslist
+	\item Automatic signal detection
+	\item Automatic Signal Classification (AMC)
+	\item OFDM parameter estimation and synchronization
+	\item GUI feedback 
+\end{itemize}
+All these tasks should be available live during runtime.
 
-This project was accepted as Google Summer of Code 2016 project and was developed in cooperation with Christopher Richardson (ESA Summer of Code in Space student at GNU Radio).
+This project was part of Google Summer of Code and ESA Summer of Code in Space programs. The toolbox was developed by Sebastian Müller
+while the explicit AMC functionality was developed by Christopher Richardson.
 }
 	
 %----------------------------------------------------------------------------------------
@@ -93,12 +101,14 @@ This project was accepted as Google Summer of Code 2016 project and was develope
 %----------------------------------------------------------------------------------------
 
 \headerbox{Flowgraph}{name=flowgraph,column=1,row=0, span=2, bottomaligned=introduction}{
-The toolbox was developed with the following main flowgraph in mind. The \textbf{Signal Extractor} block assures the ability to append custom signal processing chains for users.
+The toolbox was developed with the following main flowgraph in mind.
 
 \includegraphics[width=\textwidth]{flowgraph}
 \captionof{figure}{Example flowgraph}
 
-\vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
+The \textbf{Signal Extractor} block assures the ability to append custom signal processing chains for users. Each analysis block can have a feedback message to the \textbf{Inspector GUI} to print their results there.
+
+%\vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
 }
 
 %----------------------------------------------------------------------------------------
@@ -111,19 +121,22 @@ The toolbox consist of the follwing blocks:
 Is able to perform energy detection on an input signal. The user can specify a threshold in dB or use an automatic threshold calculation by entering a sensitivity between 0 and 1.
 
 \paragraph{Inspector GUI}
-The GUI block uses QT and QWT to create a plot of the estimated PSD by the \textbf{Signal Detector} and marks the detected signal edges. By enabling manual selection, users can select own parts of the spectrum to get passed downstream.
+The GUI block uses QT and QWT to create a plot of the estimated PSD by the \textbf{Signal Detector} and marks the detected signal edges. By enabling manual selection, users can select own parts of the spectrum that get passed downstream. Analysis blocks can be connected to the GUI to display analysis results directly next to the specific signal.
 
 \paragraph{Signal Separator}
-Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. All the signal samples get wrappen in a message and passed downstream.
+Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. All the signal samples get wrapped in a message and passed downstream. Taps can be calculated during runtime or a precalculated taps file can be selected.
 
 \paragraph{Signal Extractor}
-Takes messages from the \textbf{Signal Separator} and extracts only the samples belonging to the specified signal in the block parameters. The extracted signals get passed as a complex stream.
+Takes messages from the \textbf{Signal Separator} and extracts only the samples belonging to the specified signal in the block parameters. The extracted signals get passed as a complex stream. The input samples can be resampled to satisfy a constand output sample rate.
 
 \paragraph{AMC Block}
-Uses \texttt{tensorflow} to perform a modulation classification of the detected signals.
+\textbf{TODO}
 
 \paragraph{OFDM Estimator}
-Estimates OFDM parameters like subcarrier spacing.
+Estimates OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP length.
+
+\paragraph{OFDM Synchronizer}
+After performed estimation, the signal can be frequency synchronized and stream tags can be inserted at OFDM symbol beginnings.
 
 }
 %----------------------------------------------------------------------------------------
