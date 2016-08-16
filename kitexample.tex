@@ -36,7 +36,7 @@ Kreuzstr. 11\\[.2em]
     \begin{column}{0.33\textwidth}
       \frametitle{Main}
       \begin{block}{Introduction}
-        gr-inspector is an out-of-tree module for GNU Radio. The target was to develop a signal analysis toolbox with the following real-time capabilities:\\[0.5em]
+        The Inspector is an out-of-tree module for GNU Radio. The target was to develop a \textbf{signal analysis toolbox} with the following real-time capabilities:\\[0.5em]
         \begin{itemize}
 	        \item Automatic signal detection
 	        \item Automatic Signal Classification (AMC)
@@ -44,20 +44,20 @@ Kreuzstr. 11\\[.2em]
 	        \item GUI feedback
         \end{itemize}
         \vspace{0.5em}
-        This project was part of Google Summer of Code and ESA Summer of Code in Space programs.
+        This project was developed during \textbf{Google Summer of Code} 2016 in cooperation with the Communications Engineering Lab of the Karlsruhe Institue of Technology.
       \end{block}
       \begin{block}{Components}
 \textbf{Signal Detector}
 Is able to perform energy detection on an input signal.\\[0.5em]
 
 \textbf{Inspector GUI}
-The GUI block visualizes the detected signal edges. Users can select signals manually and feed analysis messages to be displayed in the GUI.\\[0.5em]
+The GUI block visualizes the detected signal edges. Users can select signals manually and feed-back results from analysis blocks.\\[0.5em]
 
 \textbf{Signal Separator}
 Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum.\\[0.5em]
 
 \textbf{Signal Extractor}
-Passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constand output sample rate.\\[0.5em]
+Passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constant output sample rate.\\[0.5em]
 
 \textbf{AMC Block}
 \textbf{TODO}\\[0.5em]
@@ -78,22 +78,43 @@ After performed estimation, the signal can be frequency synchronized and stream 
           \includegraphics[width=\textwidth]{figures/flowgraph}
           \caption{Example flowgraph}
         \end{figure}
-
-	      The \textbf{Signal Extractor} block assures the ability to append custom signal processing chains for users. Each analysis block can have a feedback message to the \textbf{Inspector GUI} to print their results there.
+        \begin{itemize}
+          \item Signal Extractor block assures the possibility to add \textbf{custom chains} for each signal 
+          \item Analysis blocks can \textbf{feedback results} to GUI block
+        \end{itemize}
       \end{block}
       \begin{block}{GUI}
       \begin{figure}
       	\includegraphics[width=\textwidth]{figures/gui.png}
       	\caption{Inspector GUI}
       \end{figure}
-      	The GUI displays the input spectrum along with markers for all detected signals. Next to the graphical markers, information text is displayed. Each signal has a number and estimated \textbf{center frequency} and \textbf{bandwidth}. Distinct analysis toolboxes can provide \textbf{additional information} for specific signals, which will be appended to the info text.
+      \begin{itemize}
+        \item Displays input spectrum with \textbf{markers for detected signals}
+        \item \textbf{Info text} next to each signal (center frequency, bandwidth and analysis results)
+        \item Each signal can be filtered and processed in an \textbf{own chain}
+      \end{itemize}
       \end{block}
     \end{column}
   \end{columns}
   \begin{columns}[t]
   	\begin{column}{0.66\textwidth}
-  		\begin{block}{References}
-  			Some additional info
+  		\begin{block}{Applications}
+  			\begin{columns}
+        \begin{column}{0.45\textwidth}
+        \begin{itemize}
+          \item Live FM demodulation
+          \item Spectrum monitoring
+          \item Live signal processing
+        \end{itemize}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+         \begin{itemize}
+          \item Live FM demodulation
+          \item Spectrum monitoring
+          \item Live signal processing
+        \end{itemize}
+        \end{column}
+        \end{columns}
   		\end{block}
   	\end{column}
   	\begin{column}{0.01\textwidth}
