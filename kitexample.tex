@@ -20,7 +20,7 @@
 
 \title[gr-inspector]{The Inspector (gr-inspector)}
 \subtitle{A Signal Analysis Toolbox for GNU Radio}
-\author{Sebastian Müller, Karlsruhe Institute of Technology (gsenpo@gmail.com)}
+\author{Sebastian Müller, Karlsruhe Institute of Technology}
 
 \institute{\includegraphics[height=250px]{logos/cel.pdf}\textbf{Communications Engineering Lab}\\[.4em]
 Kreuzstr. 11\\[.2em]
@@ -38,8 +38,9 @@ Kreuzstr. 11\\[.2em]
       \begin{block}{Introduction}
         The Inspector is an out-of-tree module for GNU Radio. The target was to develop a \textbf{signal analysis toolbox} with the following real-time capabilities:\\[0.5em]
         \begin{itemize}
-	        \item Automatic signal detection
-	        \item Automatic Signal Classification (AMC)
+	        \item Automatic detection of continuous signals
+	        %\item Automatic Signal Classification (AMC)
+	        \item Automatic signal extraction
           \item OFDM parameter estimation and synchronization
 	        \item GUI feedback
         \end{itemize}
@@ -48,19 +49,19 @@ Kreuzstr. 11\\[.2em]
       \end{block}
       \begin{block}{Components}
 \textbf{Signal Detector}
-Is able to perform energy detection on an input signal.\\[0.5em]
+Is able to perform energy detection on a continuous input signal.\\[0.5em]
 
 \textbf{Inspector GUI}
 The GUI block visualizes the detected signal edges. Users can select signals manually and feed-back results from analysis blocks.\\[0.5em]
 
 \textbf{Signal Separator}
-Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum.\\[0.5em]
+Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. Output is a message of vectors with samples of all signals.\\[0.5em]
 
 \textbf{Signal Extractor}
 Passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constant output sample rate.\\[0.5em]
 
 \textbf{AMC Block}
-\textbf{TODO}\\[0.5em]
+The complete AMC functionality was developed by Christopher Richardson during ESA Summer of Code in Space.\\[0.5em]
 
 \textbf{OFDM Estimator}
 Estimates OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP length.\\[0.5em]
@@ -102,9 +103,10 @@ After performed estimation, the signal can be frequency synchronized and stream 
   			\begin{columns}
         \begin{column}{0.45\textwidth}
         \begin{itemize}
-          \item Live FM demodulation
           \item Spectrum monitoring
-          \item Live signal processing
+          \item Explore real-world signals
+          \item Live (FM) demodulation
+          \item Rapid prototyping
         \end{itemize}
         \end{column}
         \begin{column}{0.45\textwidth}
