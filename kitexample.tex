@@ -13,9 +13,12 @@
 
 %% Fill in the page size here. If the proportions of the fonts
 %% are not satisfactory, change the scale parameter
-\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+\usepackage[orientation=portrait,size=a1,scale=1.4]{beamerposter}
 \usepackage[utf8]{inputenc}
-
+\usepackage{enumitem}
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
 \mode<presentation>{\usetheme{kitposter}}
 
 \title[gr-inspector]{The Inspector (gr-inspector)}
@@ -36,8 +39,8 @@ Kreuzstr. 11\\[.2em]
     \begin{column}{0.33\textwidth}
       \frametitle{Main}
       \begin{block}{Introduction}
-        The Inspector is an out-of-tree module for GNU Radio. The target was to develop a \textbf{signal analysis toolbox} with the following real-time capabilities:\\[0.5em]
-        \begin{itemize}
+        The Inspector is an out-of-tree module for GNU Radio. The goal was to develop a \textbf{signal analysis toolbox} with the following real-time capabilities:\\[0.5em]
+        \begin{itemize}[leftmargin=2.5em]
 	        \item Automatic detection of continuous signals
 	        %\item Automatic Signal Classification (AMC)
 	        \item Automatic signal extraction
@@ -45,29 +48,26 @@ Kreuzstr. 11\\[.2em]
 	        \item GUI feedback
         \end{itemize}
         \vspace{0.5em}
-        This project was developed during \textbf{Google Summer of Code} 2016 in cooperation with the Communications Engineering Lab of the Karlsruhe Institue of Technology.
+        This project was initiated as a Google Summer of Code project and developed in cooperation with the Communications Engineering Lab of the Karlsruhe Institue of Technology.
       \end{block}
       \begin{block}{Components}
 \textbf{Signal Detector}
-Is able to perform energy detection on a continuous input signal.\\[0.5em]
+is able to perform energy detection on a continuous input signal.\\[0.5em]
 
 \textbf{Inspector GUI}
-The GUI block visualizes the detected signal edges. Users can select signals manually and feed-back results from analysis blocks.\\[0.5em]
+visualizes the detected signal edges. Users can select signals manually and feed-back results from analysis blocks.\\[0.5em]
 
 \textbf{Signal Separator}
-Uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. Output is a message of vectors with samples of all signals.\\[0.5em]
+uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. Output is a message of vectors with samples of all signals.\\[0.5em]
 
 \textbf{Signal Extractor}
-Passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constant output sample rate.\\[0.5em]
-
-\textbf{AMC Block}
-The complete AMC functionality was developed by Christopher Richardson during ESA Summer of Code in Space.\\[0.5em]
+passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constant output sample rate.\\[0.5em]
 
 \textbf{OFDM Estimator}
-Estimates OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP length.\\[0.5em]
+is able to estimate the OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP length.\\[0.5em]
 
 \textbf{OFDM Synchronizer}
-After performed estimation, the signal can be frequency synchronized and stream tags can be inserted at OFDM symbol beginnings.
+performs a frequency synchronization of the OFDM signal and stream tags are inserted at OFDM symbol beginnings.
 \vspace{1.5em}
       \end{block}
     \end{column}
@@ -78,7 +78,6 @@ After performed estimation, the signal can be frequency synchronized and stream 
         The toolbox was developed with the following main flowgraph in mind.
         \begin{figure}
           \includegraphics[width=\textwidth]{figures/flowgraph}
-          \caption{Example flowgraph}
         \end{figure}
         \begin{itemize}
           \item Signal Extractor block assures the possibility to add \textbf{custom chains} for each signal 
@@ -88,12 +87,12 @@ After performed estimation, the signal can be frequency synchronized and stream 
       \begin{block}{GUI}
       \begin{figure}
       	\includegraphics[width=\textwidth]{figures/gui.png}
-      	\caption{Inspector GUI}
       \end{figure}
       \begin{itemize}
         \item Displays input spectrum with \textbf{markers for detected signals}
         \item \textbf{Info text} next to each signal (center frequency, bandwidth and analysis results)
-        \item Each signal can be filtered and processed in an \textbf{own chain}
+        \item Each signal can be filtered and processed in \textbf{own chain(s)}
+        \item Signals can be selected manually
       \end{itemize}
       \end{block}
     \end{column}
