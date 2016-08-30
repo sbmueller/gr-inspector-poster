@@ -13,7 +13,7 @@
 
 %% Fill in the page size here. If the proportions of the fonts
 %% are not satisfactory, change the scale parameter
-\usepackage[orientation=portrait,size=a1,scale=1.4]{beamerposter}
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
 \usepackage{subfigure}
@@ -49,17 +49,17 @@ Kreuzstr. 11\\[.2em]
 	        \item GUI feedback
         \end{itemize}
         \vspace{0.5em}
-        This project was initiated as a Google Summer of Code project and developed in cooperation with the Communications Engineering Lab of the Karlsruhe Institue of Technology.
+        This project was initiated as a \textbf{Google Summer of Code} project and developed in cooperation with the Communications Engineering Lab of the Karlsruhe Institute of Technology.
       \end{block}
       \begin{block}{Components}
 \textbf{Signal Detector}
 is able to perform energy detection on a continuous input signal.\\[0.5em]
 
 \textbf{Inspector GUI}
-visualizes the detected signal edges. Users can select signals manually and feed-back results from analysis blocks.\\[0.5em]
+visualizes the detected signal edges. Users can select signals manually and feed back results from analysis blocks.\\[0.5em]
 
 \textbf{Signal Separator}
-uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal out of the input spectrum. Output is a message of vectors with samples of all signals.\\[0.5em]
+uses FIR filters for every detected/selected input signal to mix, filter and decimate this signal from the input spectrum. Output is a message of vectors with samples of all signals.\\[0.5em]
 
 \textbf{Signal Extractor}
 passes one signal from the Separator output as complex stream. The input samples can be resampled to satisfy a constant output sample rate.\\[0.5em]
@@ -68,42 +68,45 @@ passes one signal from the Separator output as complex stream. The input samples
 is able to estimate the OFDM parameters subcarrier spacing, symbol time, FFT lenght and CP length.\\[0.5em]
 
 \textbf{OFDM Synchronizer}
-performs a frequency synchronization of the OFDM signal and stream tags are inserted at OFDM symbol beginnings.\\[0.5em]
+performs a frequency synchronization of an OFDM signal and stream tags are inserted at OFDM symbol beginnings.\\[0.5em]
 
 \textbf{AMC Functionality}
-is available through additional blocks developed by Christopher Richardson (ESA SOCIS student).
+is available through additional blocks developed by Christopher Richardson during ESA SOCIS program.
 
-\vspace{1.5em}
+\vspace{1.15em}
       \end{block}
     \end{column}
-    \begin{column}{0.01\textwidth}
+    \begin{column}{0.007\textwidth}
     \end{column}
-    \begin{column}{0.66\textwidth}
+    \begin{column}{0.68\textwidth}
       \begin{block}{Flowgraph}
         The toolbox was developed with the following main flowgraph in mind.
         \begin{figure}
-          \includegraphics[width=\textwidth]{figures/flowgraph}
+          \includegraphics[width=0.90\textwidth]{figures/poster}
         \end{figure}
         \begin{itemize}
           \item Signal Extractor block assures the possibility to add \textbf{custom chains} for each signal 
-          \item Analysis blocks can \textbf{feedback results} to GUI block
+          \item Analysis blocks can \textbf{feed back results} to GUI block
         \end{itemize}
       \end{block}
       \begin{block}{GUI}
       \begin{figure}
-        \includegraphics[width=\textwidth]{figures/gui.png}
+        \includegraphics[width=0.91\textwidth]{figures/gui3.png}%\vspace{0.1em}
+        %\includegraphics[width=0.49\textwidth]{figures/gui2.png}\\[0.2em]
+        %\includegraphics[width=0.49\textwidth]{figures/gui3.png}\vspace{0.1em}
+        %\includegraphics[width=0.49\textwidth]{figures/gui4.png}
       \end{figure}
       \begin{itemize}
         \item Displays input spectrum with \textbf{markers for detected signals}
         \item \textbf{Info text} next to each signal (center frequency, bandwidth and analysis results)
         \item Each signal can be filtered and processed in \textbf{own chain(s)}
-        \item Signals can be selected manually
+        \item Signals can be \textbf{selected manually}
       \end{itemize}
       \end{block}
     \end{column}
   \end{columns}
   \begin{columns}[t]
-  	\begin{column}{0.66\textwidth}
+  	\begin{column}{0.68\textwidth}
   		\begin{block}{Applications}
   			\begin{columns}
         \begin{column}{0.45\textwidth}
@@ -122,7 +125,7 @@ is available through additional blocks developed by Christopher Richardson (ESA 
         \end{columns}
   		\end{block}
   	\end{column}
-  	\begin{column}{0.01\textwidth}
+  	\begin{column}{0.007\textwidth}
   	\end{column}
   	\begin{column}{0.33\textwidth}
   		\begin{block}{Contact}
